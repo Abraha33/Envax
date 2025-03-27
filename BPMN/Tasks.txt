@@ -1,0 +1,26 @@
+home page
+modulo pos{
+    ventana QR
+    botones en lado superior:
+    crear cliente, estado de caja, ver ordnes de venta, 
+    notificaciónes{
+        gestor de faltantes{ 
+            //para quien son, cuantos, detalles
+            //boton con 
+        }
+    }
+    etapa
+    // barra progreso de etapas con uso de ventanas{
+        carrito
+        datos
+        metodo envio
+        pago
+        }
+    //categorias conectado con subcategorias se despliegan
+
+}
+ordenes de venta
+ordenes de compra
+compra{
+
+}

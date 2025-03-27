@@ -1,0 +1,114 @@
+{Proceso: Facturación y Entrega de Pedido}
+
+ {Evento de Inicio: Cliente registrado inicia checkout}
+ {Tarea: Verifica si el cliente está registrado}
+  {Decisión: Cliente registrado?}
+   {Sí: Continúa con checkout}
+   {No: Bloquea compra y muestra mensaje}
+
+ {Subproceso: Carrito de Compras}
+  {Tarea: Cliente revisa productos seleccionados}
+  {Tarea: Cliente revisa promociones y descuentos disponibles}
+  {Tarea: Cliente hace clic en 'Ir a Comprar'}
+  {Tarea: Se guardan los precios actuales del pedido}
+  {Evento: Se genera una notificación al CRM del vendedor}
+
+ {Subproceso: Datos de Facturación}
+  {Tarea: Confirmar datos del cliente y facturación}
+  {Tarea: Confirmar si desea factura electrónica}
+  {Tarea: Validar si aplica retenciones fiscales}
+  {Tarea: Confirmar información de contacto}
+
+ {Subproceso: Datos de Entrega}
+  {Tarea: Confirmar dirección de entrega}
+  {Tarea: Cliente elige dirección vinculada o nueva}
+  {Tarea: Cliente puede confirmar dirección en el mapa}
+  {Tarea: Cliente ingresa detalles adicionales de dirección}
+  {Tarea: Seleccionar método de entrega}
+   {Decisión: Tipo de entrega}
+    {Ruta de entrega: Se muestra la fecha de entrega asignada}
+    {Entrega programada: Cliente elige día y hora}
+    {Entrega inmediata: Se calcula costo de envío en moto}
+    {Retiro en tienda: Se notifica al cliente cuando el pedido esté listo}
+
+ {Subproceso: Pago}
+  {Tarea: Cliente elige método de pago}
+   {Decisión: Tipo de pago}
+    {Contra entrega: Solo efectivo, monto máximo permitido}
+    {Pasarela de pago: Tarjeta débito, crédito, PSE}
+    {Transferencia bancaria: Enviar comprobante vía WhatsApp y verificación manual}
+  {Tarea: Se muestra resumen del pedido antes de pagar}
+  {Tarea: Se verifica si el pedido es inmediato y si los productos aplican para envío en moto}
+   {Decisión: Pedido inmediato con pasarela de pago?}
+    {Sí: Pedido queda pendiente de confirmación del vendedor}
+    {No: Se procede con el pago}
+
+ {Subproceso: Confirmación y Seguimiento}
+  {Tarea: Cliente recibe confirmación del pedido}
+  {Tarea: Cliente puede ver estado del pedido en su cuenta}
+  {Tarea: Cliente puede cancelar el pedido antes del despacho}
+  {Evento: Si se cancela, se notifica al sistema y se anula orden}
+
+ {Subproceso: Notificaciones}
+  {Tarea: Notificar al vendedor cuando hay pedido pendiente}
+  {Tarea: Enviar mensaje a WhatsApp del vendedor con detalles del pedido}
+  {Tarea: Enviar recordatorio de despacho si el pedido se procesará a primera hora}
+
+ {Subproceso: Prioridad de Pedidos}
+  {Decisión: El pedido está pagado?}
+   {Sí: Se procesa inmediatamente}
+   {No: Se aparta hasta confirmación del vendedor}
+  {Tarea: Si el pedido no se confirma en tiempo N, se cancela automáticamente}
+  {Tarea: Si el pedido es de envío inmediato, auxiliar revisa cantidades}
+   {Decisión: Cantidades correctas?}
+    {Sí: Se convierte en factura de venta}
+    {No: Se notifica al administrador}
+
+ {Subproceso: Cancelaciones}
+  {Decisión: El pedido está pagado?}
+   {Sí: Pasa por validación del vendedor y luego del administrador (24-48h)}
+   {No: Cliente lo cancela directamente desde la página}
+
+ {Evento de Fin: Pedido completado y en proceso de entrega}
+
+{Proceso: Gestión de Compras y Logística}
+
+ {Subproceso: Recepción de Mercancía}
+  {Tarea: Auxiliar recibe la mercancía en área cubierta por cámara}
+  {Tarea: Encargado autoriza la recepción}
+  {Tarea: Validar factura, precios, cantidades y otros datos del pedido}
+  {Decisión: ¿Existen discrepancias en la recepción?}
+   {Sí: Consultar según jerarquía de roles}
+    {Tarea: Consultar al responsable de área}
+    {Decisión: ¿Respuesta recibida?}
+     {Sí: Registrar acuerdo en el sistema (por ejemplo, compromiso de descuento para el siguiente pedido)}
+     {No: Consultar al administrador}
+   {No: Continuar con el registro de la recepción}
+  {Tarea: Registrar la recepción para futuras comparativas con el proveedor}
+
+ {Subproceso: Análisis de Stock y Demanda}
+  {Tarea: Recolectar métricas en tiempo real (ventas, clicks, carritos abandonados)}
+  {Tarea: Calcular el tiempo estimado para agotarse el producto usando algoritmo matemático}
+   {Decisión: ¿Tiempo disponible < umbral definido (stock mínimo, seguridad, etc.)?}
+    {Sí: Activar proceso de compra estratégica}
+     {Tarea: Priorizar compra de productos críticos (por ejemplo, vasos)}
+     {Tarea: Verificar flujo de caja para proceder a la compra}
+     {Decisión: ¿Acuerdo con proveedor oficial en precio, tiempo y cantidad?}
+      {Sí: Realizar compra a proveedor oficial}
+      {No: Proceder con compra a distribuidor (auxiliar) para evitar stock out}
+   {No: Mantener stock actual y seguir monitoreando}
+
+ {Subproceso: Pedidos vía WhatsApp}
+  {Tarea: Cliente envía comprobante de pago por transferencia vía WhatsApp}
+  {Tarea: Administrador verifica manualmente el comprobante}
+  {Decisión: ¿Pago validado?}
+   {Sí: Confirmar pedido y notificar al vendedor}
+   {No: Mantener pedido en estado pendiente y registrar en CRM}
+
+ {Subproceso: Gestión de Términos y Devoluciones}
+  {Tarea: Visualización de términos y condiciones de devolución en la tienda (icono de interrogación con info emergente)}
+  {Decisión: ¿El producto cumple los términos para devolución?}
+   {Sí: Procesar devolución}
+   {No: Rechazar devolución y notificar al cliente}
+
+ {Evento de Fin: Logística y compras optimizadas}

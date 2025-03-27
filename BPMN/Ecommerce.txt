@@ -1,0 +1,157 @@
+
+erp next open source  
+alojamiento en la nube{Digital ocean}  
+autenticación{aws}  
+azure y aws con valor para la fórmula  
+
+tienda virtual{  
+       *carrito de compras es para comerciantes  
+       *debe ser simple  
+       *revisar funciones funcionales ¿y qué diferencian de la competencia (importantes)  
+       *gestor de promociones, y tipo de cliente (debe)  
+
+       gestor de promociones{  
+              checkout {  
+                     hay promoción secundaria // debajo de resumen de factura o productos  
+                     hay promoción primaria // ventana emergente aparece al oprimir el botón "datos" para la etapa de datos  
+              }  
+              carrusel de promociones {  
+                     inicial // antes del checkout  
+                     secundario // aparece al oprimir el botón "datos"  
+              }  
+              reglas {  
+                     prioridad {  
+                            1. evento  
+                            2. tipo de comercio del cliente  
+                     }  
+                     etiquetas // categorías o tags para segmentar promociones  
+              }  
+       }  
+}  
+
+erp {  
+       crm{}  
+       pos{}  
+}  
+
+aplicativo móvil{}  
+
+videojuego{  
+       seguridad{  
+              *solo para PC, mejor una ventana sin opción de:  
+              - Grabar  
+              - Descargar  
+              - Captura de pantalla 
+              }  
+}  
+
+envío programado{  
+       domicilio programado  
+       ruta camión  
+}  
+
+domicilio inmediato{}  
+retiro en tienda{}  
+
+contraentrega{}  
+pasarela de pago{  
+       transferencia  
+}  
+cuellos de botella:
+reabastecimiento de mercancia antes de pedido y durante un pedido
+
+oferta{
+  inventario{
+       *etiquetas de productos
+       *habladores
+       *llegada de mercancia {revisar factura, precios, monto, productos y cntidades}
+       *salida de mercancia{}
+       *inventarios ciclico{ diario por medidoresres, chekeo rapido, sugeridos  }
+       *toma de pedidos de compra{
+              sugerencia encargados
+              compra por sugeencia sistema
+       }
+  }
+  manejo de faltantes
+}
+despacho de pedidos{
+       ordenes de factura con enumeracion:
+       orden de pedido, responsable, 
+}
+
+demanda{
+  tienda virtual analitics de productos{
+       favoritas, lista de mecados
+       ventas
+       clicks
+
+  }
+  punto de venta{
+       pregunta de clientes
+
+  }
+}
+
+
+
+
+{Proceso: Facturación y Entrega de Pedido}
+ {Subproceso: Validación de Cliente y Registro de Pago}
+  {Tarea: Confirmar registro del cliente}
+  {Tarea: Verificar método de pago (incluyendo transferencia bancaria)}
+  {Tarea: Validación manual del comprobante de pago}
+  {Tarea: Notificar al CRM en caso de ausencia de pago}
+
+{Proceso: Gestión de Compras y Logística}
+
+ {Subproceso: Recepción de Mercancía}
+  {Tarea: Auxiliar recibe mercancía en área con cámara}
+  {Tarea: Encargado autoriza la recepción}
+  {Tarea: Validar factura, precios, cantidades y otros datos del pedido}
+  {Decisión: ¿Existen discrepancias en la recepción?}
+   {Sí: Consultar según jerarquía de roles}
+    {Tarea: Consultar al responsable de área}
+    {Decisión: ¿Respuesta recibida?}
+     {Sí: Registrar acuerdo en el sistema (p. ej., compromiso de descuento en próximo pedido)}
+     {No: Consultar al administrador}
+   {Tarea: Registrar la recepción para seguimiento con el proveedor}
+
+ {Subproceso: Análisis de Stock y Demanda}
+  {Tarea: Recolectar métricas en tiempo real (ventas, clicks, carritos abandonados)}
+  {Tarea: Calcular tiempo estimado para agotarse el producto mediante algoritmo}
+  {Decisión: ¿Tiempo disponible menor al umbral definido?}
+   {Sí: Activar proceso de compra estratégica}
+    {Tarea: Priorizar compra de productos críticos (ej.: vasos)}
+    {Tarea: Verificar flujo de caja para proceder a la compra}
+    {Decisión: ¿Proveedor oficial cumple en precio, tiempo y cantidad?}
+     {Sí: Realizar compra a proveedor oficial}
+     {No: Proceder con compra a distribuidor para evitar stock out}
+
+ {Subproceso: Pedidos vía WhatsApp}
+  {Tarea: Cliente envía comprobante de pago por transferencia vía WhatsApp}
+  {Tarea: Administrador verifica el comprobante manualmente}
+  {Decisión: ¿Pago validado?}
+   {Sí: Confirmar pedido y notificar al vendedor}
+   {No: Mantener pedido en estado pendiente y registrar en CRM}
+
+ {Subproceso: Gestión de Términos y Devoluciones}
+  {Tarea: Visualización de términos y condiciones de devolución (ícono interrogación con info emergente)}
+  {Decisión: ¿El producto cumple los términos para devolución?}
+   {Sí: Procesar devolución}
+   {No: Rechazar devolución y notificar al cliente}
+
+{Proceso: Compras Estratégicas}
+
+ {Subproceso: Flujo de Compra}
+  {Tarea: Analizar flujo de caja para priorizar compras}
+  {Tarea: Definir umbrales (días/unidades) para activar la compra}
+
+ {Subproceso: Decisión de Proveedor}
+  {Tarea: Comparar variables: precio, tiempo, cantidad y otros}
+  {Decisión: ¿Proveedor oficial cumple?}
+   {Sí: Realizar compra con proveedor oficial}
+   {No: Activar proceso de compra a distribuidor auxiliar para evitar stock out}
+
+ {Subproceso: Alertas y Seguimiento}
+  {Tarea: Establecer alertas tempranas para evitar agotamiento de productos}
+  {Tarea: Registrar y dar seguimiento a la negociación con proveedores}
